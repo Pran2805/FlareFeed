@@ -24,10 +24,9 @@ export const getPosts = async (_, res) => {
             message: "Posts fetched successfully",
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
-            message: "Failed to fetch posts",
-            error: error.message,
+            message: error.message || "Internal Server Error",
         });
     }
 };
@@ -58,8 +57,7 @@ export const getPostById = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "Failed to fetch posts",
-            error: error.message,
+            message: error.message || "Internal Server Error",
         });
     }
 };
@@ -97,8 +95,7 @@ export const getUsersPost = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "Failed to fetch posts",
-            error: error.message,
+            message: error.message || "Internal Server Error",
         });
     }
 };
