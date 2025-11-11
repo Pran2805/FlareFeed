@@ -1,6 +1,6 @@
 import { clerkClient, getAuth } from "@clerk/express";
 import User from "../models/user.model.js";
-
+import Notification from '../models/notification.model.js'
 export const getUserProfile = async (req, res) => {
     try {
         const { username } = req.params;
@@ -89,6 +89,7 @@ export const syncUser = async (req, res) => {
         })
     }
 }
+ 
 export const getUserData = async (req, res) => {
     try {
         const { userId } = getAuth(req)
@@ -118,7 +119,7 @@ export const followUser = async (req, res) => {
             throw new Error("Id is required")
         }
 
-        if (userId === id) {
+        if (userId.toString() === id.toString()) {
             throw new Error("You cannot follow yourself")
         }
 
