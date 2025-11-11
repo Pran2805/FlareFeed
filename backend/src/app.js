@@ -16,16 +16,11 @@ app.use(clerkMiddleware())
 app.use("/api/v1", router)
 
 // not going to used but just for safety
-app.use((err, _, res)=>{
+app.use((err, req, res, next)=>{
     return res.status(500).json({
         message: err.message || "Internal Server Error"
     })
 })
 
-app.use("*", (req, res)=>{
-    return res.status({
-        success: false,
-        message: "Invalid Route - Check route again!!!"
-    })
-})
+
 export default app;
