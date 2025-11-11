@@ -5,10 +5,12 @@ import { protectRoute } from "../middlewares/auth.middleware.js";
 const router = Router()
 
 
+router.route("/me").get(protectRoute, getUserData)
 router.route("/profile/:username").get(getUserProfile)
+
 router.route("/sync").post(protectRoute, syncUser)
-router.route("/me").post(protectRoute, getUserData)
+router.route("/follow/:id").post(protectRoute, followUser)
+
 router.route("/profile").put(protectRoute, updateProfile)
 
-router.route("/follow/:id").post(protectRoute, followUser)
 export default router;

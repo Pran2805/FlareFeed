@@ -1,6 +1,7 @@
 import { clerkClient, getAuth } from "@clerk/express";
 import User from "../models/user.model.js";
 import Notification from '../models/notification.model.js'
+
 export const getUserProfile = async (req, res) => {
     try {
         const { username } = req.params;
@@ -163,25 +164,6 @@ export const followUser = async (req, res) => {
         })
         return res.status(200).json({
             message: isFollowing ? "User unfollowed Successfully" : "User followed successfully",
-            success: true
-        })
-    } catch (error) {
-        return res.status(400).json({
-            message: error?.message || "Internal Server Error",
-            success: false
-        })
-    }
-}
-export const acceptRequest = async (req, res) => {
-    try {
-        const { userId } = getAuth(req)
-        const user = await User.findOne({ clerkId: userId })
-
-        if (!user) {
-            throw new Error("User not Found")
-        }
-        return res.status(200).json({
-            user,
             success: true
         })
     } catch (error) {
